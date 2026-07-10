@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Placeholder design tokens — reemplazar por el branding oficial (regla 14) */
+@theme {
+	--color-brand: var(--color-neutral-900);
+	--color-brand-contrast: var(--color-neutral-50);
+}
