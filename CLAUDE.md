@@ -41,6 +41,8 @@ Manage it with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
 Note: [src/layouts/Layout.astro](src/layouts/Layout.astro) imports `global.css` (Tailwind entry) and accepts `title` (required) and `description` (optional) props for per-page SEO. Pages render inside it via `<slot />`.
 
+La distribución detallada de páginas, secciones y componentes vive en [structure.md](structure.md) — mantenerlo actualizado al agregar, quitar o reordenar secciones.
+
 ## Documentation
 
 Full docs: https://docs.astro.build. Consult these before related work:
