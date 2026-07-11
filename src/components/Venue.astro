@@ -1,0 +1,24 @@
+---
+const gallery = [1, 2, 3, 4];
+---
+
+<!-- Hotel Hilton -->
+<section id="hotel" class="bg-neutral-50 py-16 sm:py-24">
+	<div class="mx-auto max-w-6xl px-4">
+		<div class="mx-auto max-w-2xl text-center">
+			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Hotel Hilton</h2>
+			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+				Ubicación, características y servicios placeholder. Reemplazar por el copy oficial.
+			</p>
+		</div>
+
+		<div class="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+			{
+				gallery.map(() => (
+					<div class="aspect-video w-72 shrink-0 snap-center rounded-2xl bg-neutral-200 sm:w-96" />
+				))
+			}
+		</div>
+	</div>
+</section>
+<!-- End Hotel Hilton -->

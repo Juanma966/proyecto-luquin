@@ -1,0 +1,54 @@
+---
+const partners = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D', 'Empresa E'];
+// Se duplica la lista para lograr un bucle continuo en el marquee.
+const loop = [...partners, ...partners];
+---
+
+<!-- Empresas que nos acompañan -->
+<section class="py-16 sm:py-24">
+	<div class="mx-auto max-w-6xl px-4">
+		<div class="mx-auto max-w-2xl text-center">
+			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Empresas que nos acompañan</h2>
+			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+				Marcas y sponsors placeholder. Reemplazar por los logos oficiales.
+			</p>
+		</div>
+	</div>
+
+	<div class="marquee mt-12 overflow-hidden">
+		<div class="marquee__track flex w-max gap-6">
+			{
+				loop.map((name, i) => (
+					<div
+						aria-hidden={i >= partners.length ? 'true' : undefined}
+						class="flex h-24 w-40 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 text-sm font-medium text-neutral-500"
+					>
+						{name}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+<!-- End Empresas que nos acompañan -->
+
+<style>
+	.marquee__track {
+		animation: marquee 25s linear infinite;
+	}
+
+	@keyframes marquee {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.marquee__track {
+			animation: none;
+		}
+	}
+</style>
