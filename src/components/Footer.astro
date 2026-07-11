@@ -1,0 +1,62 @@
+---
+const year = new Date().getFullYear();
+
+const navLinks = [
+	{ label: 'Sobre el evento', href: '#sobre' },
+	{ label: 'Entradas', href: '#entradas' },
+	{ label: 'Sponsors', href: '/sponsors' },
+];
+
+const socials = [
+	{ label: 'Instagram', href: '#' },
+	{ label: 'Facebook', href: '#' },
+	{ label: 'X', href: '#' },
+];
+---
+
+<!-- Footer -->
+<footer class="border-t border-neutral-200 bg-white">
+	<div class="mx-auto max-w-6xl px-4 py-12">
+		<div class="flex flex-col gap-8 sm:flex-row sm:justify-between">
+			<div>
+				<a href="/" class="text-lg font-bold tracking-tight">Luquin</a>
+				<p class="mt-2 max-w-xs text-sm text-neutral-600">
+					Descripción breve placeholder del evento.
+				</p>
+			</div>
+
+			<nav class="flex flex-col gap-3">
+				<span class="text-sm font-semibold">Navegación</span>
+				{
+					navLinks.map((link) => (
+						<a
+							href={link.href}
+							class="text-sm text-neutral-600 transition hover:text-neutral-900"
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</nav>
+
+			<div class="flex flex-col gap-3">
+				<span class="text-sm font-semibold">Síguenos</span>
+				{
+					socials.map((social) => (
+						<a
+							href={social.href}
+							class="text-sm text-neutral-600 transition hover:text-neutral-900"
+						>
+							{social.label}
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="mt-10 border-t border-neutral-200 pt-6 text-sm text-neutral-500">
+			© {year} Luquin. Todos los derechos reservados.
+		</div>
+	</div>
+</footer>
+<!-- End Footer -->

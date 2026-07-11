@@ -1,0 +1,31 @@
+---
+const highlights = [
+	{ title: 'Título del punto 1', text: 'Descripción placeholder del primer aspecto destacado del evento.' },
+	{ title: 'Título del punto 2', text: 'Descripción placeholder del segundo aspecto destacado del evento.' },
+	{ title: 'Título del punto 3', text: 'Descripción placeholder del tercer aspecto destacado del evento.' },
+];
+---
+
+<!-- Sobre el evento -->
+<section id="sobre" class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
+	<div class="mx-auto max-w-2xl text-center">
+		<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Sobre el evento</h2>
+		<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+			Descripción breve del evento y de lo que vivirá el asistente. Contenido placeholder
+			hasta recibir el copy oficial.
+		</p>
+	</div>
+
+	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		{
+			highlights.map((item) => (
+				<div class="rounded-2xl border border-neutral-200 p-6">
+					<div class="mb-4 h-10 w-10 rounded-full bg-neutral-100"></div>
+					<h3 class="text-lg font-semibold">{item.title}</h3>
+					<p class="mt-2 text-sm text-neutral-600">{item.text}</p>
+				</div>
+			))
+		}
+	</div>
+</section>
+<!-- End Sobre el evento -->
