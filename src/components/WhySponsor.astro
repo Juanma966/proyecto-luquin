@@ -1,0 +1,33 @@
+---
+const reasons = [
+	{ title: 'Alcance', text: 'Descripción placeholder del alcance del evento.' },
+	{ title: 'Visibilidad de marca', text: 'Descripción placeholder de la visibilidad de marca.' },
+	{ title: 'Networking', text: 'Descripción placeholder de las oportunidades de networking.' },
+	{ title: 'Perfil del público', text: 'Descripción placeholder del perfil del público asistente.' },
+];
+---
+
+<!-- ¿Por qué ser Sponsor? -->
+<section class="bg-neutral-50 py-16 sm:py-24">
+	<div class="mx-auto max-w-6xl px-4">
+		<div class="mx-auto max-w-2xl text-center">
+			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">¿Por qué ser Sponsor?</h2>
+			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+				Ventajas comerciales de participar en el evento. Contenido placeholder.
+			</p>
+		</div>
+
+		<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				reasons.map((reason) => (
+					<div class="rounded-2xl border border-neutral-200 bg-white p-6">
+						<div class="mb-4 h-10 w-10 rounded-full bg-neutral-100" />
+						<h3 class="text-lg font-semibold">{reason.title}</h3>
+						<p class="mt-2 text-sm text-neutral-600">{reason.text}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+<!-- End ¿Por qué ser Sponsor? -->

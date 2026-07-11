@@ -1,0 +1,39 @@
+---
+const slides = [
+	{
+		title: 'Plano general del salón',
+		text: 'Descripción placeholder del plano general del salón.',
+	},
+	{
+		title: 'Distribución de los espacios',
+		text: 'Descripción placeholder de la distribución de los espacios comerciales.',
+	},
+];
+---
+
+<!-- Espacios Comerciales -->
+<section class="py-16 sm:py-24">
+	<div class="mx-auto max-w-6xl px-4">
+		<div class="mx-auto max-w-2xl text-center">
+			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Espacios Comerciales</h2>
+			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+				Descripción del sector comercial del evento. Deslizá para ver el plano y la distribución.
+			</p>
+		</div>
+
+		<div class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+			{
+				slides.map((slide) => (
+					<article class="flex w-full shrink-0 snap-center flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+						<div class="aspect-video w-full rounded-2xl bg-neutral-200 sm:w-1/2" />
+						<div class="sm:w-1/2">
+							<h3 class="text-xl font-semibold">{slide.title}</h3>
+							<p class="mt-2 text-base text-neutral-600">{slide.text}</p>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+<!-- End Espacios Comerciales -->

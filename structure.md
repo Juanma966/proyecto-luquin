@@ -17,7 +17,7 @@ Ambas comparten el mismo `Layout` y los componentes de `src/components/`.
 | Ruta | Archivo | Estado |
 | :--- | :--- | :--- |
 | `/` | [src/pages/index.astro](src/pages/index.astro) | En construcción (estructura base lista) |
-| `/sponsors` | [src/pages/sponsors.astro](src/pages/sponsors.astro) | Placeholder (pendiente de contenido) |
+| `/sponsors` | [src/pages/sponsors.astro](src/pages/sponsors.astro) | Estructura base completa (contenido placeholder) |
 
 ## Layout
 
@@ -43,7 +43,21 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | [Venue.astro](src/components/Venue.astro) | Hotel Hilton (`#hotel`) | `/` | Galería de imágenes placeholder (scroll-snap deslizable, sin JS) + descripción. |
 | [BecomeSponsor.astro](src/components/BecomeSponsor.astro) | Sponsor (`#sponsor`) | `/` | Intro leve + imágenes placeholder + botón "Ser sponsor" → `/sponsors`. |
 | [Tickets.astro](src/components/Tickets.astro) | Entradas (`#entradas`) | `/` | Intro leve + imágenes placeholder + botón a la **plataforma externa** de venta. |
-| [Footer.astro](src/components/Footer.astro) | Footer | `/` | Navegación interna, enlace a `/sponsors`, redes placeholder y copyright. |
+| [Footer.astro](src/components/Footer.astro) | Footer | `/`, `/sponsors` | Compartido. Navegación (anclas absolutas `/#...`), enlace a `/sponsors`, redes placeholder y copyright. |
+
+### Componentes de la Landing Sponsors (`/sponsors`)
+
+| Componente | Sección | Función |
+| :--- | :--- | :--- |
+| [SponsorHeader.astro](src/components/SponsorHeader.astro) | Header | Brand + enlace a Inicio (`/`) + CTA "Solicitar información" (→ `#contacto`). |
+| [SponsorHero.astro](src/components/SponsorHero.astro) | Hero Comercial | Propuesta comercial + CTA al formulario. |
+| [WhySponsor.astro](src/components/WhySponsor.astro) | ¿Por qué ser Sponsor? | Grilla de ventajas (alcance, visibilidad, networking, público). |
+| [CommercialSpaces.astro](src/components/CommercialSpaces.astro) | Espacios Comerciales | Carrusel de 2 partes (plano general + distribución), scroll-snap CSS. |
+| [Stands.astro](src/components/Stands.astro) | Nuestros Stands | Cards de tipos de stand (render placeholder + medidas/características). |
+| [SponsorTiers.astro](src/components/SponsorTiers.astro) | Categorías (`#categorias`) | Cards Platinum/Gold/Silver/Bronze con beneficios y CTA. |
+| [CommercialBenefits.astro](src/components/CommercialBenefits.astro) | Beneficios Comerciales | 7 beneficios con marcador/ícono placeholder. |
+| [ContactForm.astro](src/components/ContactForm.astro) | Formulario (`#contacto`) | Form con servicio de terceros (endpoint placeholder) + enlace a vendedor. |
+| [SponsorFaq.astro](src/components/SponsorFaq.astro) | Preguntas Frecuentes | Acordeón nativo `<details>` (sin JS). |
 
 ### Orden de secciones
 
@@ -54,7 +68,13 @@ Header → Hero → ¿De qué trata el evento? → Josué Luquin → Empresas qu
 → Hotel Hilton → Sponsor → Entradas → Footer
 ```
 
-**Landing Sponsors (`/sponsors`):** pendiente de definir su composición de secciones.
+**Landing Sponsors (`/sponsors`):**
+
+```
+Header Sponsors → Hero Comercial → ¿Por qué ser Sponsor? → Espacios Comerciales
+→ Nuestros Stands → Categorías de Sponsors → Beneficios Comerciales → Formulario de Contacto
+→ Preguntas Frecuentes → Footer
+```
 
 ## Estilos y design tokens
 

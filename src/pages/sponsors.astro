@@ -1,15 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SponsorHeader from '../components/SponsorHeader.astro';
+import SponsorHero from '../components/SponsorHero.astro';
+import WhySponsor from '../components/WhySponsor.astro';
+import CommercialSpaces from '../components/CommercialSpaces.astro';
+import Stands from '../components/Stands.astro';
+import SponsorTiers from '../components/SponsorTiers.astro';
+import CommercialBenefits from '../components/CommercialBenefits.astro';
+import ContactForm from '../components/ContactForm.astro';
+import SponsorFaq from '../components/SponsorFaq.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout
 	title="Luquin — Sponsors"
-	description="Conviértete en patrocinador del evento Luquin."
+	description="Conviértete en patrocinador del evento Luquin: espacios, stands y categorías de patrocinio."
 >
-	<!-- Main -->
-	<main class="flex min-h-screen flex-col items-center justify-center gap-4 p-6 text-center">
-		<h1 class="text-3xl font-bold sm:text-4xl">Landing Sponsors</h1>
-		<p class="text-neutral-500">Contenido en construcción.</p>
-	</main>
-	<!-- End Main -->
+	<SponsorHeader />
+	<SponsorHero />
+	<WhySponsor />
+	<CommercialSpaces />
+	<Stands />
+	<SponsorTiers />
+	<CommercialBenefits />
+	<ContactForm />
+	<SponsorFaq />
+	<Footer />
 </Layout>
