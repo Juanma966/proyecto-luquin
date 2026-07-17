@@ -1,5 +1,14 @@
 ---
-const gallery = [1, 2, 3, 4];
+import { Image } from 'astro:assets';
+import hotelAereo from '../assets/hilton-aereo-hq.webp';
+import hotelSalon from '../assets/hilton-conference-hq.webp';
+import hotelEntrada from '../assets/hilton-gate-hq.webp';
+
+const gallery = [
+	{ src: hotelAereo, alt: 'Vista aérea del complejo del Hotel Hilton' },
+	{ src: hotelSalon, alt: 'Salón de eventos del Hotel Hilton' },
+	{ src: hotelEntrada, alt: 'Entrada principal del Hotel Hilton' },
+];
 ---
 
 <!-- Hotel Hilton -->
@@ -14,10 +23,25 @@ const gallery = [1, 2, 3, 4];
 
 		<div class="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
 			{
-				gallery.map(() => (
-					<div class="aspect-video w-72 shrink-0 snap-center rounded-2xl bg-neutral-200 sm:w-96" />
+				gallery.map((photo) => (
+					<Image
+						src={photo.src}
+						alt={photo.alt}
+						class="aspect-video w-72 shrink-0 snap-center rounded-2xl object-cover sm:w-96"
+					/>
 				))
 			}
+		</div>
+
+		<div class="mt-8 flex justify-center">
+			<a
+				href="https://maps.app.goo.gl/J9yE2LSjSAWVMkd88"
+				target="_blank"
+				rel="noopener"
+				class="rounded-full border border-neutral-300 px-6 py-3 font-semibold text-neutral-800 transition hover:bg-neutral-100"
+			>
+				¿Cómo llegar?
+			</a>
 		</div>
 	</div>
 </section>

@@ -40,7 +40,7 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | [AboutEvent.astro](src/components/AboutEvent.astro) | ¿De qué trata el evento? (`#evento`) | `/` | Introducción + 3 actividades placeholder. |
 | [Speaker.astro](src/components/Speaker.astro) | Josué Luquin (`#expositor`) | `/` | Presentación del expositor: imagen placeholder + biografía/trayectoria. |
 | [Partners.astro](src/components/Partners.astro) | Empresas que nos acompañan | `/` | Carrusel de logos placeholder (marquee CSS auto, sin JS). |
-| [Venue.astro](src/components/Venue.astro) | Hotel Hilton (`#hotel`) | `/` | Galería de imágenes placeholder (scroll-snap deslizable, sin JS) + descripción. |
+| [Venue.astro](src/components/Venue.astro) | Hotel Hilton (`#hotel`) | `/` | Galería con fotos reales del hotel (`astro:assets`, scroll-snap deslizable, sin JS) + botón "¿Cómo llegar?" a Google Maps. |
 | [BecomeSponsor.astro](src/components/BecomeSponsor.astro) | Sponsor (`#sponsor`) | `/` | Intro leve + imágenes placeholder + botón "Ser sponsor" → `/sponsors`. |
 | [Tickets.astro](src/components/Tickets.astro) | Entradas (`#entradas`) | `/` | Intro leve + imágenes placeholder + botón a la **plataforma externa** de venta. |
 | [Footer.astro](src/components/Footer.astro) | Footer | `/`, `/sponsors` | Compartido. Navegación (anclas absolutas `/#...`), enlace a `/sponsors`, redes placeholder y copyright. |
