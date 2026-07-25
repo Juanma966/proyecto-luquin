@@ -1,12 +1,25 @@
 ---
+import { Image } from 'astro:assets';
+import 'glightbox/dist/css/glightbox.min.css';
+import standPlano from '../assets/stand-plano.webp';
+import stand1 from '../assets/stand1.webp';
+import standMedida from '../assets/stand-medida.webp';
+
 const slides = [
 	{
 		title: 'Plano general del salón',
 		text: 'Descripción placeholder del plano general del salón.',
+		image: standPlano,
 	},
 	{
 		title: 'Distribución de los espacios',
 		text: 'Descripción placeholder de la distribución de los espacios comerciales.',
+		image: stand1,
+	},
+	{
+		title: 'Distribucion de los espacios 2',
+		text: 'Descripcion opcional para probar que anda.',
+		image: standMedida,
 	},
 ];
 ---
@@ -25,7 +38,19 @@ const slides = [
 			{
 				slides.map((slide) => (
 					<article class="flex w-full shrink-0 snap-center flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-						<div class="aspect-video w-full rounded-2xl bg-neutral-200 sm:w-1/2" />
+						<a
+							href={slide.image.src}
+							class="glightbox block w-full cursor-zoom-in sm:w-1/2"
+							data-gallery="espacios-comerciales"
+							aria-label={`Ampliar imagen: ${slide.title}`}
+						>
+							<Image
+								src={slide.image}
+								alt={slide.title}
+								loading="lazy"
+								class="aspect-video w-full rounded-2xl bg-neutral-100 object-contain"
+							/>
+						</a>
 						<div class="sm:w-1/2">
 							<h3 class="text-xl font-semibold">{slide.title}</h3>
 							<p class="mt-2 text-base text-neutral-600">{slide.text}</p>
@@ -37,3 +62,13 @@ const slides = [
 	</div>
 </section>
 <!-- End Espacios Comerciales -->
+
+<script>
+	import GLightbox from 'glightbox';
+
+	GLightbox({
+		selector: '.glightbox',
+		loop: true,
+		touchNavigation: true,
+	});
+</script>

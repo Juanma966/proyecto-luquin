@@ -1,5 +1,5 @@
 ---
-const highlights = [
+const slides = [
 	{ title: 'Actividad 1', text: 'Descripción placeholder de la primera actividad principal del evento.' },
 	{ title: 'Actividad 2', text: 'Descripción placeholder de la segunda actividad principal del evento.' },
 	{ title: 'Actividad 3', text: 'Descripción placeholder de la tercera actividad principal del evento.' },
@@ -7,25 +7,28 @@ const highlights = [
 ---
 
 <!-- ¿De qué trata el evento? -->
-<section id="evento" class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-	<div class="mx-auto max-w-2xl text-center">
-		<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">¿De qué trata el evento?</h2>
-		<p class="mt-4 text-base text-neutral-600 sm:text-lg">
-			Explicación de la experiencia y las actividades principales. Contenido placeholder hasta
-			recibir el copy oficial.
-		</p>
-	</div>
+<section id="evento" class="py-16 sm:py-24">
+	<div class="mx-auto max-w-6xl px-4">
+		<div class="mx-auto max-w-2xl text-center">
+			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">¿De qué trata el evento?</h2>
+			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+				Explicación de la experiencia y las actividades principales. Deslizá para conocer cada actividad.
+			</p>
+		</div>
 
-	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-		{
-			highlights.map((item) => (
-				<div class="rounded-2xl border border-neutral-200 p-6">
-					<div class="mb-4 h-10 w-10 rounded-full bg-neutral-100" />
-					<h3 class="text-lg font-semibold">{item.title}</h3>
-					<p class="mt-2 text-sm text-neutral-600">{item.text}</p>
-				</div>
-			))
-		}
+		<div class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+			{
+				slides.map((slide) => (
+					<article class="flex w-full shrink-0 snap-center flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+						<div class="sm:w-1/2">
+							<h3 class="text-xl font-semibold">{slide.title}</h3>
+							<p class="mt-2 text-base text-neutral-600">{slide.text}</p>
+						</div>
+						<div class="aspect-video w-full rounded-2xl bg-neutral-200 sm:w-1/2" />
+					</article>
+				))
+			}
+		</div>
 	</div>
 </section>
 <!-- End ¿De qué trata el evento? -->

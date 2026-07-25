@@ -37,7 +37,7 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | :--- | :--- | :--- | :--- |
 | [Header.astro](src/components/Header.astro) | Header | `/` | Barra superior sticky: brand + navegación (Inicio · Evento · Sponsor) + CTA "Entradas". |
 | [Hero.astro](src/components/Hero.astro) | Hero | `/` | Título, fecha/lugar, CTA principal (entradas) + secundario (→ `#evento`). |
-| [AboutEvent.astro](src/components/AboutEvent.astro) | ¿De qué trata el evento? (`#evento`) | `/` | Introducción + 3 actividades placeholder. |
+| [AboutEvent.astro](src/components/AboutEvent.astro) | ¿De qué trata el evento? (`#evento`) | `/` | Introducción + carrusel horizontal de 3 actividades placeholder (texto a la izquierda, imagen a la derecha). |
 | [Speaker.astro](src/components/Speaker.astro) | Josué Luquin (`#expositor`) | `/` | Presentación del expositor: imagen placeholder + biografía/trayectoria. |
 | [Partners.astro](src/components/Partners.astro) | Empresas que nos acompañan | `/` | Carrusel de logos placeholder (marquee CSS auto, sin JS). |
 | [Venue.astro](src/components/Venue.astro) | Hotel Hilton (`#hotel`) | `/` | Galería con fotos reales del hotel (`astro:assets`, scroll-snap deslizable, sin JS) + botón "¿Cómo llegar?" a Google Maps. |
@@ -52,7 +52,7 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | [SponsorHeader.astro](src/components/SponsorHeader.astro) | Header | Brand + enlace a Inicio (`/`) + CTA "Solicitar información" (→ `#contacto`). |
 | [SponsorHero.astro](src/components/SponsorHero.astro) | Hero Comercial | Propuesta comercial + CTA al formulario. |
 | [WhySponsor.astro](src/components/WhySponsor.astro) | ¿Por qué ser Sponsor? | Grilla de ventajas (alcance, visibilidad, networking, público). |
-| [CommercialSpaces.astro](src/components/CommercialSpaces.astro) | Espacios Comerciales | Carrusel de 2 partes (plano general + distribución), scroll-snap CSS. |
+| [CommercialSpaces.astro](src/components/CommercialSpaces.astro) | Espacios Comerciales | Carrusel de 3 partes (plano general + distribución x2), scroll-snap CSS. Imágenes ampliables con GLightbox (lightbox + swipe entre ellas), lazy loading. |
 | [Stands.astro](src/components/Stands.astro) | Nuestros Stands | Cards de tipos de stand (render placeholder + medidas/características). |
 | [SponsorTiers.astro](src/components/SponsorTiers.astro) | Categorías (`#categorias`) | Cards Platinum/Gold/Silver/Bronze con beneficios y CTA. |
 | [CommercialBenefits.astro](src/components/CommercialBenefits.astro) | Beneficios Comerciales | 7 beneficios con marcador/ícono placeholder. |

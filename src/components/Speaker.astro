@@ -1,14 +1,80 @@
+---
+import { Image } from "astro:assets";
+import luquin01 from "../assets/luquin01.webp";
+import luquin02 from "../assets/luquin02.webp";
+import collageModels from "../assets/collage-models.webp";
+---
+
 <!-- Josué Luquin -->
 <section id="expositor" class="bg-neutral-50 py-16 sm:py-24">
 	<div class="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-2 md:items-center">
-		<div class="aspect-square rounded-2xl bg-neutral-200"></div>
-		<div>
-			<p class="text-sm font-medium tracking-widest text-neutral-500 uppercase">Expositor</p>
-			<h2 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Josué Luquin</h2>
-			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
-				Biografía y trayectoria placeholder del expositor. Reemplazar por el copy oficial.
-			</p>
+		<div class="relative aspect-square overflow-hidden rounded-2xl bg-neutral-200">
+			<Image
+				src={luquin01}
+				alt="Josué Luquin"
+				class="absolute inset-0 h-full w-full object-cover"
+			/>
+			<Image
+				src={luquin02}
+				alt="Josué Luquin"
+				class="luquin-fade absolute inset-0 h-full w-full object-cover"
+			/>
+		</div>
+		<div class="relative flex flex-col justify-center overflow-hidden rounded-2xl p-6 sm:p-8 md:aspect-square">
+			<Image
+				src={collageModels}
+				alt=""
+				class="absolute inset-0 h-full w-full object-cover"
+			/>
+			<div class="speaker-copy-gradient absolute inset-0"></div>
+			<div class="relative">
+				<p class="text-sm font-medium tracking-widest text-neutral-500 uppercase">Experiencia Aluquinada</p>
+				<h2 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Josué Luquin</h2>
+				<p class="mt-4 text-base text-neutral-600 sm:text-lg">
+					Con más de 20 años en la Industria Beuty, a travez de su <strong>estilo vibrante y técnica impecable</strong> se convirtió en un referente
+					para miles de profesionales en la Región. Llevando su talento a pasarelas de moda, producciones de televisión,
+					campañas publicitarias  y editoriales de revista, siendo un visionario de las tendencias globales dem maquillaje<br> Fundador de <strong>LUQUIN LA ESCUELA</strong>, su pasión por compartir el conocimiento
+					lo llevó a ser uno de los educadores en el mundo beauty más admirado, impartiendo decenas de Masterclass anuales en todo el Continente.
+				</p>
+			</div>
 		</div>
 	</div>
 </section>
 <!-- End Josué Luquin -->
+
+<style>
+	/* Gradiente sobre el fondo de los párrafos — ajustable (subir/bajar/quitar) */
+	.speaker-copy-gradient {
+		background: linear-gradient(
+			to right,
+			rgba(250, 250, 250, 0.95),
+			rgba(250, 250, 250, 0.75)
+		);
+	}
+
+	.luquin-fade {
+		opacity: 0;
+		animation: luquin-fade 14s ease-in-out infinite;
+	}
+
+	@keyframes luquin-fade {
+		0%,
+		45% {
+			opacity: 0;
+		}
+		55%,
+		90% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.luquin-fade {
+			animation: none;
+			opacity: 1;
+		}
+	}
+</style>
