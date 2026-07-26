@@ -1,24 +1,28 @@
 ---
 const tiers = [
 	{
-		name: 'Platinum',
+		name: 'PLATINUM',
 		featured: true,
-		benefits: ['Beneficio placeholder', 'Beneficio placeholder', 'Beneficio placeholder', 'Beneficio placeholder'],
+		description: '(Hasta 3 ó 4 marcas exclusivas).',
+		benefits: ['Stand Premium de gran Dimensión.', 'Ubicación Preferencial dentro del evento.', 'Máxima exposición Publicitaria.', 'Presencia Destacada en escenario principal.', 'Inclusión prioritaria en toda la comunicación institucional.', 'Espacios para demostraciones en vivo.','Branding en sectores estratégicos del evento.', 'Difusión permanente en redes.', 'Activaciones exclusivas de marca.', 'Participacion Destacada en Streaming Oficial.', 'Reconocimiento como Sponsor Platinum durante toda la jornada.','Incluye productos,muestras y material promocional dentro de las Gifts Bags Oficiales.'],
 	},
 	{
-		name: 'Gold',
+		name: 'GOLD',
 		featured: false,
-		benefits: ['Beneficio placeholder', 'Beneficio placeholder', 'Beneficio placeholder'],
+		description: '(Hasta 11 marcas).',
+		benefits: ['Stand Destacado', 'Excelente ubicación dentro del evento.', 'Presencia en toda la comunicación oficial.', 'Espacios para activaciónes de marca.', 'Demostración de productos', 'Difusión en redes sociales', 'Presencia institucional durante todo el evento', 'Inclusión de muestras ó productos en las Gift Bags Oficiales.'],
 	},
 	{
-		name: 'Silver',
+		name: 'SILVER',
 		featured: false,
-		benefits: ['Beneficio placeholder', 'Beneficio placeholder'],
+		description: '(Hasta 22 marcas).',
+		benefits: ['Stand Comercial', 'Presencia en la comunicación oficial', 'Espacio para demostraciones de productos.', 'Difusión en Redes Sociales', 'Inclusión de muestras y folleterias en las Gifts Bags.', 'Presencia institucional durante toda la jornada.'],
 	},
 	{
-		name: 'Bronze',
+		name: 'BRONZE',
 		featured: false,
-		benefits: ['Beneficio placeholder', 'Beneficio placeholder'],
+		description: '(Hasta 10 marcas).',
+		benefits: ['Presencia Institucional de la marca', 'Inclusión del logo en materiales de difuión.', 'Presencia en carteleria del evento oficial.', 'Inclusión de folleteria, catálogos o muestras dentro de los Gifts Bags Oficiales.', 'Participación dentro de la comunicación institucional.'],
 	},
 ];
 ---
@@ -29,7 +33,7 @@ const tiers = [
 		<div class="mx-auto max-w-2xl text-center">
 			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Categorías de Sponsors</h2>
 			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
-				Compará los niveles de patrocinio y sus beneficios. Contenido placeholder.
+				Compará los niveles de patrocinio y sus beneficios. Los espacios son limitados y estarán ubicados estratégicamente dentro del circuito principal del evento.
 			</p>
 		</div>
 
@@ -43,6 +47,7 @@ const tiers = [
 						]}
 					>
 						<h3 class="text-lg font-semibold">{tier.name}</h3>
+						<p class="mt-2 text-sm text-neutral-600">{tier.description}</p>
 						<ul class="mt-4 mb-8 flex flex-col gap-2 text-sm text-neutral-600">
 							{tier.benefits.map((benefit) => (
 								<li class="flex items-start gap-2">
