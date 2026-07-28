@@ -1,7 +1,12 @@
 ---
-const slides = [
-	{ title: 'Aprende junto a Luquin', text: 'Una jornada de capacitación intensiva con Josué Luquin para dominar las técnicas de maquillaje más avanzadas del mercado, actualizar tus servicios y elevar el valor de tu trabajo.' },
-	{ title: 'Experiencia & Comunidad', text: 'Más que un evento, un punto de encuentro aspiracional. Disfrutá de un ambiente premium donde la comunidad beauty se reúne a crear alianzas, inspirarse y celebrar el arte del maquillaje en una jornada inolvidable.' },
+import videoExpCom from '../assets/video-aboutevent1.webm';
+import videoSection2 from '../assets/video-section2.webm';
+
+type Slide = { title: string; text: string; video?: string };
+
+const slides: Slide[] = [
+	{ title: 'Aprende junto a Luquin', text: 'Una jornada de capacitación intensiva con Josué Luquin para dominar las técnicas de maquillaje más avanzadas del mercado, actualizar tus servicios y elevar el valor de tu trabajo.', video: videoExpCom },
+	{ title: 'Experiencia & Comunidad', text: 'Más que un evento, un punto de encuentro aspiracional. Disfrutá de un ambiente premium donde la comunidad beauty se reúne a crear alianzas, inspirarse y celebrar el arte del maquillaje en una jornada inolvidable.', video: videoSection2 },
 	{ title: 'Explorá las mejores Marcas & Novedades', text: 'Explorá y testeá insumos de primer nivel antes que nadie. Un espacio interactivo para conocer lanzamientos, probar fórmulas en directo y renovar tu kit de productos con las firmas más destacadas de la industria.' },
 ];
 ---
@@ -24,7 +29,18 @@ const slides = [
 							<h3 class="text-xl font-semibold">{slide.title}</h3>
 							<p class="mt-2 text-base text-neutral-300">{slide.text}</p>
 						</div>
-						<div class="aspect-video w-full rounded-2xl bg-neutral-800 sm:w-1/2" />
+						{slide.video ? (
+							<video
+								src={slide.video}
+								muted
+								loop
+								playsinline
+								preload="metadata"
+								class="aspect-video w-full rounded-2xl bg-neutral-800 object-cover sm:w-1/2"
+							/>
+						) : (
+							<div class="aspect-video w-full rounded-2xl bg-neutral-800 sm:w-1/2" />
+						)}
 					</article>
 				))
 			}
@@ -35,8 +51,32 @@ const slides = [
 
 <script>
 	const carousel = document.querySelector<HTMLElement>('[data-autocarousel]');
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	if (carousel && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+	// Reproduce automáticamente solo el video del slide visible y pausa el resto
+	if (carousel && !reduceMotion) {
+		const videos = carousel.querySelectorAll('video');
+
+		if (videos.length) {
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						const video = entry.target as HTMLVideoElement;
+						if (entry.isIntersecting) {
+							video.play().catch(() => {});
+						} else {
+							video.pause();
+						}
+					});
+				},
+				{ threshold: 0.6 },
+			);
+
+			videos.forEach((video) => io.observe(video));
+		}
+	}
+
+	if (carousel && !reduceMotion) {
 		const slides = Array.from(carousel.children) as HTMLElement[];
 
 		if (slides.length > 1) {
