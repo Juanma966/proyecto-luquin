@@ -2,6 +2,15 @@
 
 /* Placeholder design tokens — reemplazar por el branding oficial (regla 14) */
 @theme {
-	--color-brand: var(--color-neutral-900);
-	--color-brand-contrast: var(--color-neutral-50);
+	--color-brand: #ffff99;
+	--color-brand-contrast: #1a1a1a;
+	--color-tertiary: #5c5c5c;
+}
+
+/* Base: tema oscuro — fondo negro y texto claro por defecto */
+@layer base {
+	body {
+		background-color: #000000;
+		color: var(--color-neutral-100);
+	}
 }

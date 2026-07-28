@@ -1,8 +1,8 @@
 ---
 const slides = [
-	{ title: 'Actividad 1', text: 'Descripción placeholder de la primera actividad principal del evento.' },
-	{ title: 'Actividad 2', text: 'Descripción placeholder de la segunda actividad principal del evento.' },
-	{ title: 'Actividad 3', text: 'Descripción placeholder de la tercera actividad principal del evento.' },
+	{ title: 'Aprende junto a Luquin', text: 'Una jornada de capacitación intensiva con Josué Luquin para dominar las técnicas de maquillaje más avanzadas del mercado, actualizar tus servicios y elevar el valor de tu trabajo.' },
+	{ title: 'Experiencia & Comunidad', text: 'Más que un evento, un punto de encuentro aspiracional. Disfrutá de un ambiente premium donde la comunidad beauty se reúne a crear alianzas, inspirarse y celebrar el arte del maquillaje en una jornada inolvidable.' },
+	{ title: 'Explorá las mejores Marcas & Novedades', text: 'Explorá y testeá insumos de primer nivel antes que nadie. Un espacio interactivo para conocer lanzamientos, probar fórmulas en directo y renovar tu kit de productos con las firmas más destacadas de la industria.' },
 ];
 ---
 
@@ -10,21 +10,21 @@ const slides = [
 <section id="evento" class="py-16 sm:py-24">
 	<div class="mx-auto max-w-6xl px-4">
 		<div class="mx-auto max-w-2xl text-center">
-			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">¿De qué trata el evento?</h2>
-			<p class="mt-4 text-base text-neutral-600 sm:text-lg">
-				Explicación de la experiencia y las actividades principales. Deslizá para conocer cada actividad.
+			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">La Experiencia Beauty del Año</h2>
+			<p class="mt-4 text-base text-neutral-300 sm:text-lg">
+				Sumergite en un encuentro único diseñado por Excellence Producciones junto a Josué Luquin. Una jornada exclusiva en el Hilton Mendoza que combina la técnica de un referente internacional, un espacio de networking sin pantallas con la comunidad beauty y el acceso directo a las mejores marcas del mercado. Deslizá para ver la experiencia.
 			</p>
 		</div>
 
-		<div class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+		<div class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4" data-autocarousel>
 			{
 				slides.map((slide) => (
 					<article class="flex w-full shrink-0 snap-center flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
 						<div class="sm:w-1/2">
 							<h3 class="text-xl font-semibold">{slide.title}</h3>
-							<p class="mt-2 text-base text-neutral-600">{slide.text}</p>
+							<p class="mt-2 text-base text-neutral-300">{slide.text}</p>
 						</div>
-						<div class="aspect-video w-full rounded-2xl bg-neutral-200 sm:w-1/2" />
+						<div class="aspect-video w-full rounded-2xl bg-neutral-800 sm:w-1/2" />
 					</article>
 				))
 			}
@@ -32,3 +32,55 @@ const slides = [
 	</div>
 </section>
 <!-- End ¿De qué trata el evento? -->
+
+<script>
+	const carousel = document.querySelector<HTMLElement>('[data-autocarousel]');
+
+	if (carousel && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const slides = Array.from(carousel.children) as HTMLElement[];
+
+		if (slides.length > 1) {
+			let index = 0;
+			let timer: number | undefined;
+
+			const go = (i: number) => {
+				index = (i + slides.length) % slides.length;
+				carousel.scrollTo({
+					left: slides[index].offsetLeft - carousel.offsetLeft,
+					behavior: 'smooth',
+				});
+			};
+
+			const start = () => {
+				stop();
+				timer = window.setInterval(() => go(index + 1), 6000);
+			};
+
+			const stop = () => window.clearInterval(timer);
+
+			// Resincroniza el índice con el slide visible tras deslizar manualmente
+			let scrollTimer: number | undefined;
+			const syncIndex = () => {
+				const pos = carousel.scrollLeft + carousel.offsetLeft;
+				index = slides.reduce(
+					(best, slide, i) =>
+						Math.abs(slide.offsetLeft - pos) < Math.abs(slides[best].offsetLeft - pos) ? i : best,
+					0,
+				);
+			};
+
+			carousel.addEventListener('scroll', () => {
+				window.clearTimeout(scrollTimer);
+				scrollTimer = window.setTimeout(syncIndex, 150);
+			});
+
+			// Pausa mientras el usuario interactúa
+			carousel.addEventListener('mouseenter', stop);
+			carousel.addEventListener('mouseleave', start);
+			carousel.addEventListener('pointerdown', stop);
+			carousel.addEventListener('pointerup', start);
+
+			start();
+		}
+	}
+</script>

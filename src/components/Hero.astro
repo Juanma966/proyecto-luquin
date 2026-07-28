@@ -1,27 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import heroLuquin from '../assets/hero-luquin.webp';
+---
+
 <!-- Hero -->
-<section class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-16 text-center sm:py-24">
-	<p class="text-sm font-medium tracking-widest text-neutral-500 uppercase">
-		11 Abril 2027 · Hotel HILTON Mendoza
-	</p>
-	<h1 class="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-		ALUQUINADA 
-	</h1>
-	<p class="max-w-xl text-base text-neutral-600 sm:text-lg">
-		MAKE-UP EXPERIENCE con Josué Luquin.
-	</p>
-	<div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-		<a
-			href="#"
-			class="rounded-full bg-brand px-6 py-3 font-semibold text-brand-contrast transition hover:opacity-90"
-		>
-			Comprar entradas
-		</a>
-		<a
-			href="#evento"
-			class="rounded-full border border-neutral-300 px-6 py-3 font-semibold text-neutral-800 transition hover:bg-neutral-100"
-		>
-			Más información
-		</a>
+<section class="relative isolate overflow-hidden">
+	<Image
+		src={heroLuquin}
+		alt="Josué Luquin"
+		class="absolute inset-0 -z-10 h-full w-full object-cover"
+	/>
+	<div class="absolute inset-0 -z-10 bg-black/60"></div>
+	<div class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-24 text-center sm:py-32">
+		<p class="text-sm font-medium tracking-widest text-brand uppercase">
+			11 Abril 2027 · Hotel HILTON Mendoza
+		</p>
+		<h1 class="text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+			ALUQUINADA
+		</h1>
+		<p class="max-w-xl text-base text-neutral-200 sm:text-lg">
+			MAKE-UP EXPERIENCE con Josué Luquin.
+		</p>
+		<div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+			<a
+				href="#"
+				class="rounded-full bg-brand px-6 py-3 font-semibold text-brand-contrast transition hover:opacity-90"
+			>
+				Comprar entradas
+			</a>
+			<a
+				href="#evento"
+				class="rounded-full bg-tertiary px-6 py-3 font-semibold text-white transition hover:opacity-90"
+			>
+				Más información
+			</a>
+		</div>
 	</div>
 </section>
 <!-- End Hero -->

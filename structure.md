@@ -36,7 +36,7 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | Componente | Sección | Usado en | Función |
 | :--- | :--- | :--- | :--- |
 | [Header.astro](src/components/Header.astro) | Header | `/` | Barra superior sticky: brand + navegación (Inicio · Evento · Sponsor) + CTA "Entradas". |
-| [Hero.astro](src/components/Hero.astro) | Hero | `/` | Título, fecha/lugar, CTA principal (entradas) + secundario (→ `#evento`). |
+| [Hero.astro](src/components/Hero.astro) | Hero | `/` | Imagen de fondo (`hero-luquin.webp`) con overlay oscuro; título, fecha/lugar, CTA principal (entradas) + secundario (→ `#evento`). |
 | [AboutEvent.astro](src/components/AboutEvent.astro) | ¿De qué trata el evento? (`#evento`) | `/` | Introducción + carrusel horizontal de 3 actividades placeholder (texto a la izquierda, imagen a la derecha). |
 | [Speaker.astro](src/components/Speaker.astro) | Josué Luquin (`#expositor`) | `/` | Presentación del expositor: imagen placeholder + biografía/trayectoria. |
 | [Partners.astro](src/components/Partners.astro) | Empresas que nos acompañan | `/` | Carrusel de logos placeholder (marquee CSS auto, sin JS). |
@@ -79,16 +79,18 @@ Header Sponsors → Hero Comercial → ¿Por qué ser Sponsor? → Espacios Come
 ## Estilos y design tokens
 
 - Tailwind CSS 4 vía `@tailwindcss/vite`. Entrada única: [src/styles/global.css](src/styles/global.css).
-- **Tokens placeholder** en el bloque `@theme` de `global.css` (reemplazar por el branding oficial, regla 14):
-  - `--color-brand` → color de acento (CTAs). Utilidades: `bg-brand`, `text-brand`, `border-brand`, `ring-brand`.
-  - `--color-brand-contrast` → color de texto sobre el acento. Utilidad: `text-brand-contrast`.
-- El resto usa la paleta **neutral** de Tailwind como placeholder.
+- **Tema oscuro:** fondo negro global y texto claro por defecto (regla base en `body` dentro de `@layer base` de `global.css`). Las secciones no llevan fondo propio (heredan el negro); las tarjetas usan `bg-neutral-900` con `border-neutral-800`.
+- **Tokens** en el bloque `@theme` de `global.css`:
+  - `--color-brand` → `#ffff99` (color secundario / acento y CTA principal). Utilidades: `bg-brand`, `text-brand`, `border-brand`, `ring-brand`. Se usa en CTAs principales, eyebrows y detalles destacados.
+  - `--color-brand-contrast` → texto oscuro sobre el acento amarillo. Utilidad: `text-brand-contrast`.
+  - `--color-tertiary` → `#5c5c5c` (relleno de botones secundarios). Utilidades: `bg-tertiary`, `text-tertiary`.
+- Textos: cuerpo en `text-neutral-300`, secundarios en `text-neutral-400`, títulos heredan el claro del `body`.
 - **Mobile-first:** clases base para móvil (360px+), luego `sm:` (768px+) y `lg:` (1024px+).
 
 ## Placeholders e integraciones pendientes
 
 - **Venta de entradas:** el botón de la sección Entradas enlaza a una plataforma externa. Hoy `href="#"` hasta tener la URL real.
-- **Imágenes:** bloques neutros (`bg-neutral-200`) como placeholder hasta recibir las imágenes oficiales.
+- **Imágenes:** bloques neutros (`bg-neutral-800`) como placeholder hasta recibir las imágenes oficiales.
 - **Contacto de sponsors:** en la landing `/sponsors` se usará un formulario con servicio de terceros (Formspree/Getform u similar); endpoint como placeholder hasta definirlo.
 - **Branding:** textos, colores, tipografías, imágenes e iconografía son placeholder hasta recibir los recursos oficiales.
 
