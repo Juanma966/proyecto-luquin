@@ -1,12 +1,14 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const benefits = [
-	'Posicionamiento de marca',
-	'Genera nuevos contactos comerciales',
-	'Incrementa tus ventas',
-	'Presenta lanzamientos y novedades',
-	'Crea experiencias memorables con potenciales consumidores',
-	'Ubicación estratégica de los stands, aumentando tu visibilidad',
-	'Fideliza tus clientes',
+	{ text: 'Posicionamiento de marca', icon: 'lucide:megaphone' },
+	{ text: 'Genera nuevos contactos comerciales', icon: 'lucide:user-plus' },
+	{ text: 'Incrementa tus ventas', icon: 'lucide:trending-up' },
+	{ text: 'Presenta lanzamientos y novedades', icon: 'lucide:rocket' },
+	{ text: 'Crea experiencias memorables con potenciales consumidores', icon: 'lucide:sparkles' },
+	{ text: 'Ubicación estratégica de los stands, aumentando tu visibilidad', icon: 'lucide:map-pin' },
+	{ text: 'Fideliza tus clientes', icon: 'lucide:heart-handshake' },
 ];
 ---
 
@@ -16,7 +18,7 @@ const benefits = [
 		<div class="mx-auto max-w-2xl text-center">
 			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Beneficios Comerciales</h2>
 			<p class="mt-4 text-base text-neutral-300 sm:text-lg">
-				Oportunidades que ofrece el evento para las marcas. Los íconos son placeholder.
+				Oportunidades que ofrece el evento para las marcas.
 			</p>
 		</div>
 
@@ -24,8 +26,10 @@ const benefits = [
 			{
 				benefits.map((benefit) => (
 					<div class="flex items-start gap-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-6">
-						<div class="h-10 w-10 shrink-0 rounded-full bg-neutral-800" />
-						<p class="text-sm font-medium text-neutral-200">{benefit}</p>
+						<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-800 text-brand">
+							<Icon name={benefit.icon} class="h-5 w-5" />
+						</div>
+						<p class="text-sm font-medium text-neutral-200">{benefit.text}</p>
 					</div>
 				))
 			}

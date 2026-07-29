@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# correo: credenciales reales y librería de terceros (se colocan solo en el servidor/local)
+public/mail-config.php
+public/lib/PHPMailer/*.php
+
 # macOS-specific files
 .DS_Store
 

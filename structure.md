@@ -56,7 +56,7 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | [Stands.astro](src/components/Stands.astro) | Nuestros Stands | Cards de tipos de stand (render placeholder + medidas/características). |
 | [SponsorTiers.astro](src/components/SponsorTiers.astro) | Categorías (`#categorias`) | Cards Platinum/Gold/Silver/Bronze con beneficios y CTA. |
 | [CommercialBenefits.astro](src/components/CommercialBenefits.astro) | Beneficios Comerciales | 7 beneficios con marcador/ícono placeholder. |
-| [ContactForm.astro](src/components/ContactForm.astro) | Formulario (`#contacto`) | Form con servicio de terceros (endpoint placeholder) + enlace a vendedor. |
+| [ContactForm.astro](src/components/ContactForm.astro) | Formulario (`#contacto`) | Form que envía por `fetch` a `public/contact.php` (PHPMailer + SMTP Hostinger) hacia info@excellenceproducciones.com; honeypot anti-spam + enlaces WhatsApp/email. Ver [FORMULARIO-CONTACTO.md](FORMULARIO-CONTACTO.md). |
 | [SponsorFaq.astro](src/components/SponsorFaq.astro) | Preguntas Frecuentes | Acordeón nativo `<details>` (sin JS). |
 
 ### Orden de secciones
@@ -91,7 +91,7 @@ Header Sponsors → Hero Comercial → ¿Por qué ser Sponsor? → Espacios Come
 
 - **Venta de entradas:** el botón de la sección Entradas enlaza a una plataforma externa. Hoy `href="#"` hasta tener la URL real.
 - **Imágenes:** bloques neutros (`bg-neutral-800`) como placeholder hasta recibir las imágenes oficiales.
-- **Contacto de sponsors:** en la landing `/sponsors` se usará un formulario con servicio de terceros (Formspree/Getform u similar); endpoint como placeholder hasta definirlo.
+- **Contacto de sponsors:** en la landing `/sponsors` el formulario envía a info@excellenceproducciones.com vía endpoint PHP propio en Hostinger (`public/contact.php`, PHPMailer + SMTP), sin servicios de terceros. Ver [FORMULARIO-CONTACTO.md](FORMULARIO-CONTACTO.md).
 - **Branding:** textos, colores, tipografías, imágenes e iconografía son placeholder hasta recibir los recursos oficiales.
 
 ## Cómo agregar o modificar una sección

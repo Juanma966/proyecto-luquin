@@ -1,9 +1,12 @@
 ---
+import bgSections from '../assets/bg-sections.webp';
+import { Icon } from 'astro-icon/components';
+
 const reasons = [
-	{ title: 'Alcance', text: 'meses de exposición continua sumados al evento Beauty más importante del año.' },
-	{ title: 'Visibilidad de marca', text: 'Posicione su marca ante una audiencia altamente segmentada con proyección y alcance nacional e internacional.' },
-	{ title: 'Networking', text: 'Viva el networking en su máxima expresión: un espacio único para crear contactos, intercambiar tendencias e interactuar con grandes referentes del maquillaje global.' },
-	{ title: 'Enfoque Profesional', text: 'Acelere la adopción de sus lanzamientos y potencie su volumen de ventas conectando su catálogo con el público indicado.' },
+	{ title: 'Alcance', text: 'meses de exposición continua sumados al evento Beauty más importante del año.', icon: 'lucide:globe' },
+	{ title: 'Visibilidad de marca', text: 'Posicione su marca ante una audiencia altamente segmentada con proyección y alcance nacional e internacional.', icon: 'lucide:eye' },
+	{ title: 'Networking', text: 'Viva el networking en su máxima expresión: un espacio único para crear contactos, intercambiar tendencias e interactuar con grandes referentes del maquillaje global.', icon: 'lucide:network' },
+	{ title: 'Enfoque Profesional', text: 'Acelere la adopción de sus lanzamientos y potencie su volumen de ventas conectando su catálogo con el público indicado.', icon: 'lucide:target' },
 ];
 ---
 
@@ -17,11 +20,16 @@ const reasons = [
 			</p>
 		</div>
 
-		<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+		<div
+			class="mt-12 grid gap-6 rounded-2xl bg-cover bg-center bg-no-repeat p-6 sm:grid-cols-2 lg:grid-cols-4"
+			style={`background-image: url(${bgSections.src})`}
+		>
 			{
 				reasons.map((reason) => (
 					<div class="rounded-2xl border border-neutral-800 bg-neutral-900 p-6">
-						<div class="mb-4 h-10 w-10 rounded-full bg-neutral-800" />
+						<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 text-brand">
+							<Icon name={reason.icon} class="h-5 w-5" />
+						</div>
 						<h3 class="text-lg font-semibold">{reason.title}</h3>
 						<p class="mt-2 text-sm text-neutral-300">{reason.text}</p>
 					</div>

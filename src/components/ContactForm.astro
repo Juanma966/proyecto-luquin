@@ -8,8 +8,16 @@
 			</p>
 		</div>
 
-		<!-- action placeholder: reemplazar por el endpoint del servicio de terceros -->
-		<form action="#" method="POST" class="mt-10 flex flex-col gap-4">
+		<form id="contact-form" action="/contact.php" method="POST" class="mt-10 flex flex-col gap-4">
+			<!-- Honeypot anti-spam: oculto para usuarios, los bots lo completan -->
+			<input
+				type="text"
+				name="website"
+				tabindex="-1"
+				autocomplete="off"
+				aria-hidden="true"
+				class="hidden"
+			/>
 			<div class="flex flex-col gap-1">
 				<label for="nombre" class="text-sm font-medium">Nombre</label>
 				<input
@@ -60,16 +68,65 @@
 			</div>
 			<button
 				type="submit"
-				class="mt-2 rounded-full bg-brand px-6 py-3 font-semibold text-brand-contrast transition hover:opacity-90"
+				class="mt-2 rounded-full bg-brand px-6 py-3 font-semibold text-brand-contrast transition hover:opacity-90 disabled:opacity-60"
 			>
 				Enviar solicitud
 			</button>
+			<p id="contact-status" role="status" aria-live="polite" class="text-center text-sm text-neutral-300"></p>
 		</form>
 
 		<p class="mt-6 text-center text-sm text-neutral-300">
 			¿Preferís hablar directo?{' '}
 			<a href="#" class="font-semibold text-brand underline">Escribinos por WhatsApp</a>
 		</p>
+		<p class="mt-2 text-center text-sm text-neutral-300">
+			O escribinos a{' '}
+			<a
+				href="mailto:info@excellenceproducciones.com"
+				class="font-semibold text-brand underline"
+			>
+				info@excellenceproducciones.com
+			</a>
+		</p>
 	</div>
 </section>
 <!-- End Formulario de Contacto -->
+
+<script>
+	const form = document.getElementById('contact-form') as HTMLFormElement | null;
+	const status = document.getElementById('contact-status');
+
+	if (form && status) {
+		const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			button.disabled = true;
+			status.textContent = 'Enviando...';
+			status.classList.remove('text-brand', 'text-red-400');
+
+			try {
+				const res = await fetch(form.action, {
+					method: 'POST',
+					body: new FormData(form),
+					headers: { Accept: 'application/json' },
+				});
+				const data = await res.json().catch(() => ({ ok: false }));
+
+				if (res.ok && data.ok) {
+					form.reset();
+					status.textContent = '¡Gracias! Recibimos tu solicitud, te contactamos a la brevedad.';
+					status.classList.add('text-brand');
+				} else {
+					status.textContent = data.error ?? 'No se pudo enviar. Revisá los datos e intentá de nuevo.';
+					status.classList.add('text-red-400');
+				}
+			} catch {
+				status.textContent = 'Error de conexión. Intentá más tarde.';
+				status.classList.add('text-red-400');
+			} finally {
+				button.disabled = false;
+			}
+		});
+	}
+</script>

@@ -12,8 +12,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@iconify-json/lucide": "^1.2.120",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.7",
+    "astro-icon": "^1.1.5",
     "glightbox": "^3.3.1",
     "sharp": "^0.35.3",
     "tailwindcss": "^4.3.2"
