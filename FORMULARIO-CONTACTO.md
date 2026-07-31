@@ -34,6 +34,8 @@ sin recargar la página.
 
 ## Notas
 
+- **Versión de PHP:** se usa **PHPMailer v7**, que requiere **PHP 8.1+**. Ajustá la versión en
+  hPanel → Avanzado → Configuración PHP. (Si necesitás PHP 7.4, usá PHPMailer v6.)
 - **Seguridad (regla 13):** la contraseña vive solo en `public/mail-config.php`, que no se
   versiona. Al ser `.php`, Hostinger lo ejecuta (no expone el código fuente si alguien lo pide
   por URL). Aun así, no lo compartas ni lo subas a git.

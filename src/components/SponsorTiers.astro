@@ -1,4 +1,6 @@
 ---
+import fondoTier from '../assets/fondo-tier.webp';
+
 const tiers = [
 	{
 		name: 'PLATINUM',
@@ -39,38 +41,63 @@ const tiers = [
 
 		<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 			{
-				tiers.map((tier) => (
-					<div
-						class:list={[
-							'flex flex-col rounded-2xl border bg-neutral-900 p-6',
-							tier.featured ? 'border-brand ring-1 ring-brand' : 'border-neutral-800',
-						]}
-					>
-						<h3 class="text-lg font-semibold">{tier.name}</h3>
-						<p class="mt-2 text-sm text-neutral-300">{tier.description}</p>
-						<ul class="mt-4 mb-8 flex flex-col gap-2 text-sm text-neutral-300">
-							{tier.benefits.map((benefit) => (
-								<li class="flex items-start gap-2">
-									<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400" />
-									{benefit}
-								</li>
-							))}
-						</ul>
-						<a
-							href="#contacto"
+				tiers.map((tier) => {
+					const waMessage = `Hola me gustaria obtener mas información sobre la categoria ${tier.name}, saludos.`;
+					const waHref = `https://wa.me/5492645739387?text=${encodeURIComponent(waMessage)}`;
+
+					return (
+						<div
+							data-tier-card
 							class:list={[
-								'mt-auto rounded-full px-6 py-3 text-center font-semibold transition',
-								tier.featured
-									? 'bg-brand text-brand-contrast hover:opacity-90'
-									: 'bg-tertiary text-white hover:opacity-90',
+								'flex cursor-pointer flex-col rounded-2xl border bg-cover bg-left bg-no-repeat p-6 transition',
+								tier.featured ? 'border-brand ring-1 ring-brand' : 'border-neutral-800',
 							]}
+							style={`background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1.0)), url(${fondoTier.src})`}
 						>
-							Elegir {tier.name}
-						</a>
-					</div>
-				))
+							<h3 class="text-lg font-semibold">{tier.name}</h3>
+							<p class="mt-2 text-sm text-neutral-300">{tier.description}</p>
+							<ul class="mt-4 mb-8 flex flex-col gap-2 text-sm text-neutral-300">
+								{tier.benefits.map((benefit) => (
+									<li class="flex items-start gap-2">
+										<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400" />
+										{benefit}
+									</li>
+								))}
+							</ul>
+							<a
+								href={waHref}
+								target="_blank"
+								rel="noopener noreferrer"
+								class:list={[
+									'mt-auto rounded-full px-6 py-3 text-center font-semibold transition',
+									tier.featured
+										? 'bg-brand text-brand-contrast hover:opacity-90'
+										: 'bg-tertiary text-white hover:opacity-90',
+								]}
+							>
+								Elegir {tier.name}
+							</a>
+						</div>
+					);
+				})
 			}
 		</div>
 	</div>
 </section>
 <!-- End Categorías de Sponsors -->
+
+<script>
+	const cards = document.querySelectorAll<HTMLElement>('[data-tier-card]');
+	const selectedClasses = ['border-brand', 'ring-1', 'ring-brand'];
+
+	const select = (target: HTMLElement) => {
+		cards.forEach((card) => {
+			card.classList.remove(...selectedClasses);
+			card.classList.add('border-neutral-800');
+		});
+		target.classList.remove('border-neutral-800');
+		target.classList.add(...selectedClasses);
+	};
+
+	cards.forEach((card) => card.addEventListener('click', () => select(card)));
+</script>

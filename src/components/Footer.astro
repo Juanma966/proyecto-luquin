@@ -1,5 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
+import logo from '../assets/excellenceproducciones_logo.webp';
+import logo2 from '../assets/excellenceproducciones_horizontal claro.webp';
 
 const year = new Date().getFullYear();
 
@@ -10,9 +12,9 @@ const navLinks = [
 ];
 
 const socials = [
-	{ label: 'Instagram', href: '#', icon: 'lucide:instagram' },
-	{ label: 'Facebook', href: '#', icon: 'lucide:facebook' },
-	{ label: 'X', href: '#', icon: 'lucide:twitter' },
+	{ label: 'Instagram', href: 'https://www.instagram.com/excellence.producciones?igsh=MXE1dWtpMnFpdTIycQ==', icon: 'simple-icons:instagram' },
+	{ label: 'Correo', href: 'mailto:info@excellenceproducciones.com', icon: 'lucide:mail' },
+	{ label: 'WhatsApp', href: 'https://wa.me/5492645739387', icon: 'simple-icons:whatsapp' },
 ];
 ---
 
@@ -21,7 +23,8 @@ const socials = [
 	<div class="mx-auto max-w-6xl px-4 py-12">
 		<div class="flex flex-col gap-8 sm:flex-row sm:justify-between">
 			<div>
-				<a href="/" class="text-lg font-bold tracking-tight">Luquin</a>
+				<a href="/" class="text-lg font-bold tracking-tight">ALUQUINADA 2027</a>
+				<img src={logo.src} alt="Excellence Producciones" class="mt-3 h-40 w-auto" />
 				<p class="mt-2 max-w-xs text-sm text-neutral-300">
 					Descripción breve placeholder del evento.
 				</p>
@@ -39,6 +42,7 @@ const socials = [
 						</a>
 					))
 				}
+				<img src={logo2.src} alt="Excellence Producciones" class="mt-3 h-24 w-auto max-w-none self-start -ml-4 translate-y-4" />
 			</nav>
 
 			<div class="flex flex-col gap-3">
@@ -49,12 +53,18 @@ const socials = [
 							<a
 								href={social.href}
 								aria-label={social.label}
+								target={social.href.startsWith('http') ? '_blank' : undefined}
+								rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
 								class="text-neutral-300 transition hover:text-white"
 							>
 								<Icon name={social.icon} class="h-5 w-5" />
 							</a>
+							
 						))
+						
+
 					}
+					
 				</div>
 			</div>
 		</div>

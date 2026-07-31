@@ -23,17 +23,26 @@ const benefits = [
 		</div>
 
 		<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			{
-				benefits.map((benefit) => (
-					<div class="flex items-start gap-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-6">
-						<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-800 text-brand">
-							<Icon name={benefit.icon} class="h-5 w-5" />
-						</div>
-						<p class="text-sm font-medium text-neutral-200">{benefit.text}</p>
-					</div>
-				))
-			}
-		</div>
+	{
+		benefits.map((benefit, index) => (
+			<div
+				class:list={[
+					"flex items-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-6",
+					index === benefits.length - 1 &&
+						benefits.length % 3 === 1 &&
+						"lg:col-start-2",
+				]}
+			>
+				<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-800 text-brand">
+					<Icon name={benefit.icon} class="h-5 w-5" />
+				</div>
+				<p class="text-sm font-medium text-neutral-200">
+					{benefit.text}
+				</p>
+			</div>
+		))
+	}
+</div>
 	</div>
 </section>
 <!-- End Beneficios Comerciales -->
