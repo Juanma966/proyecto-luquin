@@ -3,11 +3,17 @@ import { Image } from 'astro:assets';
 import hotelAereo from '../assets/hilton-aereo-hq.webp';
 import hotelSalon from '../assets/hilton-conference-hq.webp';
 import hotelEntrada from '../assets/hilton-gate-hq.webp';
+import hotelFoto1 from '../assets/IMG_1066.webp';
+import hotelFoto2 from '../assets/IMG_1073.webp';
+import hotelFoto3 from '../assets/IMG_1076.webp';
 
 const gallery = [
 	{ src: hotelAereo, alt: 'Vista aérea del complejo del Hotel Hilton' },
 	{ src: hotelSalon, alt: 'Salón de eventos del Hotel Hilton' },
 	{ src: hotelEntrada, alt: 'Entrada principal del Hotel Hilton' },
+	{ src: hotelFoto1, alt: 'Hotel Hilton Mendoza' },
+	{ src: hotelFoto2, alt: 'Hotel Hilton Mendoza' },
+	{ src: hotelFoto3, alt: 'Hotel Hilton Mendoza' },
 ];
 ---
 
@@ -15,9 +21,9 @@ const gallery = [
 <section id="hotel" class="py-16 sm:py-24">
 	<div class="mx-auto max-w-6xl px-4">
 		<div class="mx-auto max-w-2xl text-center">
-			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">¡Nos vemos en el Hotel Hilton!</h2>
+			<h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">¡Nos vemos en el Hotel Hilton!</h2>
 			<p class="mt-4 text-base text-neutral-300 sm:text-lg">
-				Un día inolvidable, en un lugar inolvidable, viví la experiencia completa.
+				UNA EXPERIENCIA A LA ALTURA DE UN HOTEL QUE ES SINÓNIMO DE EXCELENCIA Y PRESTIGIO.
 			</p>
 		</div>
 
@@ -38,7 +44,7 @@ const gallery = [
 				href="https://maps.app.goo.gl/J9yE2LSjSAWVMkd88"
 				target="_blank"
 				rel="noopener"
-				class="rounded-full bg-tertiary px-6 py-3 font-semibold text-white transition hover:opacity-90"
+				class="rounded-full bg-tertiary px-6 py-3 font-semibold text-white transition hover:bg-brand hover:text-black"
 			>
 				¿Cómo llegar?
 			</a>

@@ -1,7 +1,16 @@
 ---
-const partners = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D', 'Empresa E'];
-// Se duplica la lista para lograr un bucle continuo en el marquee.
-const loop = [...partners, ...partners];
+import { Image } from 'astro:assets';
+import logoHorizontalAzul from '../assets/LOGO HORIZONTAL AZUL.webp';
+import logoPrincipalColor from '../assets/logoprincipal_color.webp';
+
+const logos = [
+	{ src: logoHorizontalAzul, alt: 'Logo horizontal azul' },
+	{ src: logoPrincipalColor, alt: 'Logo principal' },
+];
+
+// Se repite la secuencia para llenar la cinta y se duplica para un bucle continuo.
+const base = Array.from({ length: 4 }, () => logos).flat();
+const loop = [...base, ...base];
 ---
 
 <!-- Empresas que nos acompañan -->
@@ -10,7 +19,7 @@ const loop = [...partners, ...partners];
 		<div class="mx-auto max-w-2xl text-center">
 			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Empresas que nos acompañan</h2>
 			<p class="mt-4 text-base text-neutral-300 sm:text-lg">
-				Marcas y sponsors placeholder. Reemplazar por los logos oficiales.
+				Marcas que eligen ser parte de ALUQUINADA 2027.
 			</p>
 		</div>
 	</div>
@@ -18,12 +27,17 @@ const loop = [...partners, ...partners];
 	<div class="marquee mt-12 overflow-hidden">
 		<div class="marquee__track flex w-max gap-6">
 			{
-				loop.map((name, i) => (
+				loop.map((logo, i) => (
 					<div
-						aria-hidden={i >= partners.length ? 'true' : undefined}
-						class="flex h-24 w-40 shrink-0 items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-900 text-sm font-medium text-neutral-400"
+						aria-hidden={i >= logos.length ? 'true' : undefined}
+						class="flex h-24 w-40 shrink-0 items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-900 p-4"
 					>
-						{name}
+						<Image
+							src={logo.src}
+							alt={i < logos.length ? logo.alt : ''}
+							loading="lazy"
+							class="max-h-full max-w-full object-contain"
+						/>
 					</div>
 				))
 			}

@@ -1,27 +1,39 @@
 ---
 import { Image } from 'astro:assets';
 import standEsquina2 from '../assets/stand-esquina2.webp';
+import standEsquina1 from '../assets/stand-esquina-alu.webp';
 import standAluquinada from '../assets/stand-aluquinada.webp';
 import standAluquinada2 from '../assets/stand-aluqinada2.webp';
 
 const stands = [
 	{
-		name: 'Stand Tipo A',
-		size: 'Medidas placeholder',
+		name: 'Stand PLATINUM',
+		price: 'USD 9.000',
+		size: 'Ubicación Preferencial.',
+		image: standEsquina1,
+		features: ['Presencia en Escenario Principal y Streming', 'Activaciones y demos en vivo', 'Presencia en Gift Bags'],
+
+	},
+	{
+		name: 'Stand GOLD',
+		price: 'USD 6.000',
+		size: 'Destacado',
 		image: standEsquina2,
-		features: ['Características placeholder', 'Equipamiento incluido placeholder', 'Ubicación placeholder'],
+		features: ['Espacio para activaciones', 'Difución en Redes Oficiales', 'Muestras en Gift Bags'],
 	},
 	{
-		name: 'Stand Tipo B',
-		size: 'Medidas placeholder',
+		name: 'Stand SILVER',
+		price: 'USD 4.000',
+		size: 'Comercial (estándar)',
 		image: standAluquinada,
-		features: ['Características placeholder', 'Equipamiento incluido placeholder', 'Ubicación placeholder'],
+		features: ['Demostraciones de Productos', 'Presencia Insitucional', 'Presencia en Redes'],
 	},
 	{
-		name: 'Stand Tipo C',
-		size: 'Medidas placeholder',
+		name: 'Stand BRONZE',
+		price: 'USD 2.000',
+		size: 'Sin stand físico',
 		image: standAluquinada2,
-		features: ['Características placeholder', 'Equipamiento incluido placeholder', 'Ubicación placeholder'],
+		features: ['Presencia en Cartelería Oficial', 'Inclusión de folletería en Gift Bags', 'Presencia en Comunicación Institucional'],
 	},
 ];
 ---
@@ -36,26 +48,33 @@ const stands = [
 			</p>
 		</div>
 
-		<div class="mt-12 grid gap-6 md:grid-cols-3">
+		<div class="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto py-6 sm:mt-12 sm:grid sm:grid-cols-2 sm:overflow-visible sm:py-0" data-stands-carousel>
 			{
 				stands.map((stand) => (
-					<div class="flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900 p-6">
+					<div data-stand-card class="flex w-[85%] shrink-0 snap-center flex-col rounded-2xl border-2 border-neutral-800 bg-neutral-900 p-6 transition duration-300 sm:w-auto sm:border-transparent sm:hover:scale-105">
 						<Image
 							src={stand.image}
 							alt={stand.name}
 							loading="lazy"
 							class="aspect-video w-full rounded-xl bg-neutral-800 object-cover"
 						/>
-						<h3 class="mt-4 text-lg font-semibold">{stand.name}</h3>
-						<p class="mt-1 text-sm text-neutral-300">{stand.size}</p>
-						<ul class="mt-4 flex flex-col gap-2 text-sm text-neutral-300">
-							{stand.features.map((feature) => (
-								<li class="flex items-start gap-2">
-									<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400" />
-									{feature}
-								</li>
-							))}
-						</ul>
+						<div class="mt-4 grid gap-4 sm:grid-cols-2">
+							<div class="sm:text-center">
+								<h3 class="font-display text-xl font-bold text-brand italic sm:text-2xl">{stand.name}<br><br></h3>
+								<p class="font-display text-2xl font-bold text-brand italic sm:text-3xl">{stand.price}</p>
+							</div>
+							<div>
+								<p class="text-sm text-neutral-300">{stand.size}</p>
+								<ul class="mt-2 flex flex-col gap-2 font-heading text-sm text-neutral-300">
+									{stand.features.map((feature) => (
+										<li class="flex items-start gap-2">
+											<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400" />
+											{feature}
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
 					</div>
 				))
 			}
@@ -63,3 +82,109 @@ const stands = [
 	</div>
 </section>
 <!-- End Nuestros Stands -->
+
+<style>
+	/* Escala sutil de la tarjeta centrada en el carrusel (mobile) */
+	.stand-active {
+		transform: scale(1.05);
+	}
+
+	/* Borde de la tarjeta seleccionada / centrada */
+	[data-stand-card].is-selected {
+		border-color: var(--color-brand);
+	}
+</style>
+
+<script>
+	const carousel = document.querySelector<HTMLElement>('[data-stands-carousel]');
+	const mobile = window.matchMedia('(max-width: 639px)');
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (carousel) {
+		const originals = Array.from(carousel.querySelectorAll<HTMLElement>('[data-stand-card]'));
+
+		// Desktop: seleccionar por clic — marca solo la tocada
+		originals.forEach((card) =>
+			card.addEventListener('click', () => {
+				carousel
+					.querySelectorAll('[data-stand-card]')
+					.forEach((c) => c.classList.toggle('is-selected', c === card));
+			}),
+		);
+
+		let io: IntersectionObserver | undefined;
+		let clones: HTMLElement[] = [];
+		let onScroll: (() => void) | undefined;
+		let scrollTimer: number | undefined;
+
+		// Centra el primer original (posición inicial del set del medio)
+		const midCenter = () =>
+			originals[0].offsetLeft - (carousel.clientWidth - originals[0].offsetWidth) / 2;
+
+		// Reposiciona en silencio cuando el scroll entra en la zona de clones
+		const wrap = () => {
+			const firstClone = carousel.querySelector<HTMLElement>('[data-clone]');
+			if (!firstClone) return;
+			const setWidth = originals[0].offsetLeft - firstClone.offsetLeft;
+			const lower = midCenter();
+			if (carousel.scrollLeft < lower - 1) carousel.scrollLeft += setWidth;
+			else if (carousel.scrollLeft >= lower + setWidth - 1) carousel.scrollLeft -= setWidth;
+		};
+
+		const enable = () => {
+			if (io || originals.length < 2) return;
+
+			// Clona el set completo a ambos lados para el loop infinito
+			const pre = originals.map((c) => c.cloneNode(true) as HTMLElement);
+			const post = originals.map((c) => c.cloneNode(true) as HTMLElement);
+			[...pre, ...post].forEach((c) => {
+				c.setAttribute('data-clone', '');
+				c.classList.remove('is-selected', 'stand-active');
+			});
+			pre.forEach((c) => carousel.insertBefore(c, originals[0]));
+			post.forEach((c) => carousel.appendChild(c));
+			clones = [...pre, ...post];
+
+			carousel.scrollLeft = midCenter();
+
+			onScroll = () => {
+				window.clearTimeout(scrollTimer);
+				scrollTimer = window.setTimeout(wrap, 120);
+			};
+			carousel.addEventListener('scroll', onScroll);
+
+			// Marca (y agranda) la tarjeta centrada; observa originales + clones
+			io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						const inView = entry.isIntersecting;
+						entry.target.classList.toggle('is-selected', inView);
+						if (!reduceMotion) entry.target.classList.toggle('stand-active', inView);
+					});
+				},
+				{ root: carousel, threshold: 0.8 },
+			);
+			carousel
+				.querySelectorAll<HTMLElement>('[data-stand-card]')
+				.forEach((card) => io!.observe(card));
+		};
+
+		const disable = () => {
+			io?.disconnect();
+			io = undefined;
+			if (onScroll) {
+				carousel.removeEventListener('scroll', onScroll);
+				onScroll = undefined;
+			}
+			clones.forEach((c) => c.remove());
+			clones = [];
+			carousel.scrollLeft = 0;
+			originals.forEach((c) => c.classList.remove('is-selected', 'stand-active'));
+		};
+
+		const apply = () => (mobile.matches ? enable() : disable());
+
+		apply();
+		mobile.addEventListener('change', apply);
+	}
+</script>

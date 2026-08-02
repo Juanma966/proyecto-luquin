@@ -1,38 +1,44 @@
 ---
 import { Image } from 'astro:assets';
 import heroLuquin from '../assets/hero-luquin.webp';
+import luquinMobile from '../assets/luqui-mobile.webp';
 ---
 
 <!-- Hero -->
 <section class="relative isolate overflow-hidden">
 	<Image
+		src={luquinMobile}
+		alt="Josué Luquin"
+		class="absolute inset-0 -z-10 h-full w-full object-cover sm:hidden"
+	/>
+	<Image
 		src={heroLuquin}
 		alt="Josué Luquin"
-		class="absolute inset-0 -z-10 h-full w-full object-cover"
+		class="absolute inset-0 -z-10 hidden h-full w-full object-cover sm:block"
 	/>
 	<div class="absolute inset-0 -z-10 bg-black/60"></div>
 	<div class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-24 text-center sm:py-32">
-		<p class="text-sm font-medium tracking-widest text-brand uppercase">
+		<h2 class="text-sm font-bold tracking-widest text-brand uppercase">
 			11 Abril 2027 · Hotel HILTON Mendoza
-		</p>
+		</h2>
 		<h1 class="text-6xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl">
 			ALUQUINADA
 		</h1>
-		<p class="max-w-xl text-base text-neutral-200 sm:text-lg">
-			MAKE-UP EXPERIENCE con Josué Luquin.
-		</p>
-		<div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+		<h2 class="max-w-xl text-base font-bold text-neutral-200 sm:text-lg">
+			<strong>Viví una experiencia</strong> con Josué Luquin.
+		</h2>
+		<div class="flex flex-col gap-3 sm:flex-row">
 			<a
-				href="#"
-				class="rounded-full bg-brand px-6 py-3 font-semibold text-brand-contrast transition hover:opacity-90"
+				href="#entradas"
+				class="rounded-full bg-brand px-8 py-3 font-semibold text-brand-contrast transition hover:opacity-90"
 			>
 				Comprar entradas
 			</a>
 			<a
-				href="#evento"
-				class="rounded-full bg-tertiary px-6 py-3 font-semibold text-white transition hover:opacity-90"
+				href="#sponsor"
+				class="rounded-full bg-tertiary px-8 py-3 font-semibold text-white transition hover:opacity-90"
 			>
-				Más información
+				Ser sponsor
 			</a>
 		</div>
 	</div>

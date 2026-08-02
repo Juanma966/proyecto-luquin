@@ -2,17 +2,17 @@
 
 /* Fuentes locales (public/fonts) */
 @font-face {
-	font-family: "Bebas Neue";
-	src: url("/fonts/BebasNeue-Regular.woff2") format("woff2");
+	font-family: "Anton";
+	src: url("/fonts/Anton-Regular.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Oswald";
-	src: url("/fonts/Oswald-Regular.woff2") format("woff2");
-	font-weight: 400;
+	font-family: "League Spartan";
+	src: url("/fonts/LeagueSpartan-Thin.woff2") format("woff2");
+	font-weight: 100;
 	font-style: normal;
 	font-display: swap;
 }
@@ -39,8 +39,8 @@
 	--color-brand-contrast: #1a1a1a;
 	--color-tertiary: #5c5c5c;
 
-	--font-display: "Bebas Neue", sans-serif;
-	--font-heading: "Oswald", sans-serif;
+	--font-display: "Anton", sans-serif;
+	--font-heading: "League Spartan", sans-serif;
 	--font-body: "Montserrat", sans-serif;
 }
 
@@ -56,6 +56,12 @@
 	}
 
 	h2 {
+		font-family: var(--font-heading);
+	}
+
+	/* Subtítulos: el párrafo inmediatamente debajo de cada título */
+	h1 + p,
+	h2 + p {
 		font-family: var(--font-heading);
 	}
 

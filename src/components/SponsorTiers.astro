@@ -54,7 +54,7 @@ const tiers = [
 							]}
 							style={`background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1.0)), url(${fondoTier.src})`}
 						>
-							<h3 class="text-lg font-semibold">{tier.name}</h3>
+							<h3 class="font-display text-3xl font-bold shadow-md [-webkit-text-stroke:0.2px_black]">{tier.name}</h3>
 							<p class="mt-2 text-sm text-neutral-300">{tier.description}</p>
 							<ul class="mt-4 mb-8 flex flex-col gap-2 text-sm text-neutral-300">
 								{tier.benefits.map((benefit) => (
@@ -90,13 +90,22 @@ const tiers = [
 	const cards = document.querySelectorAll<HTMLElement>('[data-tier-card]');
 	const selectedClasses = ['border-brand', 'ring-1', 'ring-brand'];
 
+	const brandBtn = ['bg-brand', 'text-brand-contrast'];
+	const tertiaryBtn = ['bg-tertiary', 'text-white'];
+
 	const select = (target: HTMLElement) => {
 		cards.forEach((card) => {
 			card.classList.remove(...selectedClasses);
 			card.classList.add('border-neutral-800');
+			const btn = card.querySelector('a');
+			btn?.classList.remove(...brandBtn);
+			btn?.classList.add(...tertiaryBtn);
 		});
 		target.classList.remove('border-neutral-800');
 		target.classList.add(...selectedClasses);
+		const btn = target.querySelector('a');
+		btn?.classList.remove(...tertiaryBtn);
+		btn?.classList.add(...brandBtn);
 	};
 
 	cards.forEach((card) => card.addEventListener('click', () => select(card)));
