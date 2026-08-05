@@ -37,7 +37,7 @@ Cada componente es una sección con responsabilidad única (regla 10).
 | :--- | :--- | :--- | :--- |
 | [Header.astro](src/components/Header.astro) | Header | `/` | Barra superior sticky: brand + navegación (Inicio · Evento · Sponsor) + CTA "Entradas". |
 | [Hero.astro](src/components/Hero.astro) | Hero | `/` | Imagen de fondo (`hero-luquin.webp`) con overlay oscuro; título, fecha/lugar, CTA principal (entradas) + secundario (→ `#evento`). |
-| [AboutEvent.astro](src/components/AboutEvent.astro) | ¿De qué trata el evento? (`#evento`) | `/` | Introducción + carrusel horizontal de 3 actividades placeholder (texto a la izquierda, imagen a la derecha). |
+| [AboutEvent.astro](src/components/AboutEvent.astro) | ¿De qué trata el evento? (`#evento`) | `/` | Introducción + carrusel horizontal de 3 actividades (texto a la izquierda, video a la derecha). Los videos son embeds de YouTube Shorts (`youtube-nocookie`) en autoplay silencioso y bucle, recortados de 9:16 a 16:9 con un contenedor `overflow-hidden`; un `IntersectionObserver` reproduce solo el slide visible vía `postMessage` y respeta `prefers-reduced-motion`. |
 | [Speaker.astro](src/components/Speaker.astro) | Josué Luquin (`#expositor`) | `/` | Presentación del expositor: imagen placeholder + biografía/trayectoria. |
 | [Partners.astro](src/components/Partners.astro) | Empresas que nos acompañan | `/` | Carrusel de logos placeholder (marquee CSS auto, sin JS). |
 | [Venue.astro](src/components/Venue.astro) | Hotel Hilton (`#hotel`) | `/` | Galería con fotos reales del hotel (`astro:assets`, scroll-snap deslizable, sin JS) + botón "¿Cómo llegar?" a Google Maps. |

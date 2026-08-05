@@ -1,16 +1,15 @@
 ---
-import sect1Webm from '../assets/video-sect1.webm';
-import sect1Mp4 from '../assets/video-sect1.mp4';
-import sect2Mp4 from '../assets/video-section2.mp4';
-import sect3Mp4 from '../assets/Video-Sect3-webm.mp4';
-
-type Slide = { title: string; text: string; webm?: string; mp4?: string };
+type Slide = { title: string; text: string; youtubeId: string };
 
 const slides: Slide[] = [
-	{ title: 'Aprende junto a Luquin', text: 'Una jornada de capacitación intensiva con Josué Luquin para dominar las técnicas de maquillaje más avanzadas del mercado, actualizar tus servicios y elevar el valor de tu trabajo.', webm: sect1Webm, mp4: sect1Mp4 },
-	{ title: 'Experiencia & Comunidad', text: 'Más que un evento, un punto de encuentro aspiracional. Disfrutá de un ambiente premium donde la comunidad beauty se reúne a crear alianzas, inspirarse y celebrar el arte del maquillaje en una jornada inolvidable.', mp4: sect2Mp4 },
-	{ title: 'Explorá las mejores Marcas & Novedades', text: 'Explorá y testeá insumos de primer nivel antes que nadie. Un espacio interactivo para conocer lanzamientos, probar fórmulas en directo y renovar tu kit de productos con las firmas más destacadas de la industria.', mp4: sect3Mp4 },
+	{ title: 'Aprende junto a Luquin', text: 'Una jornada de capacitación intensiva con Josué Luquin para dominar las técnicas de maquillaje más avanzadas del mercado, actualizar tus servicios y elevar el valor de tu trabajo.', youtubeId: 'iGkbkyCc9bs' },
+	{ title: 'Experiencia & Comunidad', text: 'Más que un evento, un punto de encuentro aspiracional. Disfrutá de un ambiente premium donde la comunidad beauty se reúne a crear alianzas, inspirarse y celebrar el arte del maquillaje en una jornada inolvidable.', youtubeId: 'tkF2i8fGucE' },
+	{ title: 'Explorá las mejores Marcas & Novedades', text: 'Explorá y testeá insumos de primer nivel antes que nadie. Un espacio interactivo para conocer lanzamientos, probar fórmulas en directo y renovar tu kit de productos con las firmas más destacadas de la industria.', youtubeId: 'CywqiUfdJ6A' },
 ];
+
+// Autoplay silencioso en bucle, sin controles ni teclado; `playlist` es lo que habilita el loop
+const embedUrl = (id: string) =>
+	`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&rel=0&playsinline=1&disablekb=1&enablejsapi=1`;
 ---
 
 <!-- ¿De qué trata el evento? -->
@@ -33,20 +32,18 @@ Deslizá y descubrí la experiencia.
 							<h3 class="text-xl font-semibold">{slide.title}</h3>
 							<p class="mt-2 text-base text-neutral-300">{slide.text}</p>
 						</div>
-						{slide.webm || slide.mp4 ? (
-							<video
-								muted
-								loop
-								playsinline
-								preload="metadata"
-								class="aspect-video w-full rounded-2xl bg-neutral-800 object-cover sm:w-1/2"
-							>
-								{slide.webm && <source src={slide.webm} type="video/webm" />}
-								{slide.mp4 && <source src={slide.mp4} type="video/mp4" />}
-							</video>
-						) : (
-							<div class="aspect-video w-full rounded-2xl bg-neutral-800 sm:w-1/2" />
-						)}
+						<div
+							data-yt
+							class="relative aspect-video w-full overflow-hidden rounded-2xl bg-neutral-800 sm:w-1/2"
+						>
+							<iframe
+								src={embedUrl(slide.youtubeId)}
+								title={slide.title}
+								allow="autoplay; encrypted-media; picture-in-picture"
+								referrerpolicy="strict-origin-when-cross-origin"
+								class="absolute left-1/2 top-1/2 aspect-[9/16] w-full -translate-x-1/2 -translate-y-1/2 border-0"
+							/>
+						</div>
 					</article>
 				))
 			}
@@ -60,25 +57,30 @@ Deslizá y descubrí la experiencia.
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	// Reproduce automáticamente solo el video del slide visible y pausa el resto
-	if (carousel && !reduceMotion) {
-		const videos = carousel.querySelectorAll('video');
+	if (carousel) {
+		const wrappers = carousel.querySelectorAll<HTMLElement>('[data-yt]');
 
-		if (videos.length) {
+		const command = (frame: HTMLIFrameElement, func: 'playVideo' | 'pauseVideo') =>
+			frame.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+
+		if (reduceMotion) {
+			wrappers.forEach((wrapper) => {
+				const frame = wrapper.querySelector('iframe');
+				if (frame) frame.src = frame.src.replace('autoplay=1', 'autoplay=0');
+			});
+		} else if (wrappers.length) {
+			// Observa el contenedor recortado y no el iframe: el iframe desborda y nunca llegaría al umbral
 			const io = new IntersectionObserver(
 				(entries) => {
 					entries.forEach((entry) => {
-						const video = entry.target as HTMLVideoElement;
-						if (entry.isIntersecting) {
-							video.play().catch(() => {});
-						} else {
-							video.pause();
-						}
+						const frame = entry.target.querySelector('iframe');
+						if (frame) command(frame, entry.isIntersecting ? 'playVideo' : 'pauseVideo');
 					});
 				},
 				{ threshold: 0.6 },
 			);
 
-			videos.forEach((video) => io.observe(video));
+			wrappers.forEach((wrapper) => io.observe(wrapper));
 		}
 	}
 
